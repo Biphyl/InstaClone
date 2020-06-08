@@ -68,3 +68,18 @@ class Profile(models.Model):
         new_bio = new_bio_object.bio
         return new_bio
 
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE,related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=100)
+    created_date = models.DateTimeField(default=timezone.now)
+
+
+    def __str__(self):
+        return f'{self.post.author}, {self.user.username}'
+
+    class Meta:
+        db_table = 'comment'
+
+    def save_comment(self):
+        self.save()
