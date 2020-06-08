@@ -21,6 +21,13 @@ class CommentForm(forms.ModelForm):
         fields = ['comment']
 
 
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['email']
+
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
