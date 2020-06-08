@@ -5,6 +5,8 @@ from django.db.models.signals import post_save
 from django.http import Http404
 from django.dispatch import receiver
 
+
+
 class Post(models.Model):
     author = models.ForeignKey('auth.user',on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images/')
@@ -40,3 +42,29 @@ class Post(models.Model):
         except ObjectDoesNotExist:
             raise Http404()
         return post
+
+class Profile(models.Model):
+    profile_photo = models.ImageField(upload_to='images')
+    bio = models.CharField(max_length=200)
+    user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
+    
+    
+    def __str__(self):
+        return f'{self.user.username} Profile'
+
+    class Meta:
+        db_table = 'Profile'
+    
+    def save_profile(self):
+        self.save()
+        
+    def delete_profile(self):
+        self.delete()
+    
+    @classmethod   
+    def update_bio(cls,id,new_bio):
+        cls.objects.filter(pk = id).update(bio=new_bio)
+        new_bio_object = cls.objects.get(bio = new_bio)
+        new_bio = new_bio_object.bio
+        return new_bio
+
