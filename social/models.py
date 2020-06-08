@@ -83,3 +83,22 @@ class Comment(models.Model):
 
     def save_comment(self):
         self.save()
+
+
+class Following(models.Model):
+    users = models.ManyToManyField(User, related_name='friend_set')
+    current_user = models.ForeignKey(User, related_name='owner', on_delete=models.PROTECT, null=True)
+    
+    @classmethod
+    def make_user(cls,current_user,new_friend):
+        friend, created = cls.objects.get_or_create(
+            current_user=current_user
+        )
+        friend.users.add(new_friend)
+
+    @classmethod
+    def loose_user(cls,current_user,new_friend):
+        friend, created = cls.objects.get_or_create(
+            current_user=current_user
+        )
+        friend.users.remove(new_friend)
