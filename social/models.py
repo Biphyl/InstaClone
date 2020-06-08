@@ -9,10 +9,10 @@ class Post(models.Model):
     author = models.ForeignKey('auth.user',on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images/')
     caption = models.TextField()
-    date_created = models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(default=timezone.now)
     likes = models.ManyToManyField(User, related_name='likes', blank=True)
 
-    def __str__
+    def __str__(self):
         return f'{self.author} Post'
 
     class Meta:
