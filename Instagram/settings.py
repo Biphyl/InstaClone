@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'vote',
     'django_registration',
+    'crispy_forms',
 
 ]
 

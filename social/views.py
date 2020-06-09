@@ -5,7 +5,7 @@ from .forms import UserCreationForm,UserUpdateForm,CommentForm,ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 
 
-@login_required
+
 def post(request):
     posts = Post.objects.all()
     users = User.objects.exclude(id=request.user.id)

@@ -44,7 +44,7 @@ class Post(models.Model):
         return post
 
 class Profile(models.Model):
-    profile_photo = models.ImageField(upload_to='images')
+    image = models.ImageField(upload_to='images')
     bio = models.CharField(max_length=200)
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
     
