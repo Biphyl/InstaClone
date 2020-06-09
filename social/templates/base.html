@@ -17,7 +17,7 @@
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
         integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
-        
+
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'css/styles.css'%}">
     {%  endblock %}
@@ -25,16 +25,18 @@
 
 <body>
     <nav class="navbar navbar-expand-lg light fixed-top" id="">
-        <a class="text-success text-title insta" href="{% url 'posts' %}"><i class="fa fa-instagram text-secondary ml-2"></i>Instagram</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="text-success text-title insta" href="{% url 'posts' %}"><i
+                class="fa fa-instagram text-secondary ml-2"></i>Instagram</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="fa fa-bars fa-3x mt-3 text-white"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
             <div class="search_bar ml-auto" id="searchform">
                 <form action="" class="text-black" method="get">
-                {% csrf_token %}
-                <input type="text" name="post" class="search text-black" placeholder="search">
-                <button type="submit" class="btn btn-light"> <i class="fa fa-search"></i> </button>
+                    {% csrf_token %}
+                    <input type="text" name="post" class="search text-black" placeholder="search">
+                    <button type="submit" class="btn btn-light"> <i class="fa fa-search"></i> </button>
                 </form>
             </div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -48,27 +50,28 @@
                     <a class="ml-3 text-success join" href="">Sign Up</a>
                     {% endif %}
                 </ul>
-            </div> 
+            </div>
         </div>
-    </nav> 
+    </nav>
     <div class="container-fluid">
         {% block content %}
         {%  endblock %}
     </div>
 
     {% block scripts %}
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
-    {% bootstrap_javascript %}
-    <script src="{% static 'js/'%}"></script>
+    <script src="{% static 'js/scripts.js'%}"></script>
     {% endblock %}
 </body>
 
