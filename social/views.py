@@ -82,3 +82,33 @@ def profile(request):
     'posts':posts,
     }
     return render(request, 'profile.html', context)
+
+def search_user(request):
+    if 'post' in request.GET and request.GET['post']:
+        search_term = request.GET["post"]
+        searched_posts = Post.search_by_author(search_term)
+        message = f'search_term'
+        author = User.objects.all()
+        context = {
+            "author":author,
+            "posts":searched_posts,
+            "message":message,
+
+        }
+        return render(request, 'search.html', context)
+    else:
+        message = "You haven't searched for any user"
+        context = {
+            "message":message,
+        }
+        return render(request, 'search.html', context)
+
+
+def follow(request,operation,pk):
+    new_follower = User.objects.get(pk=pk)
+    if operation == 'add':
+        Following.make_user(request.user, new_follower)
+    elif operation == 'remove':
+        Following.loose_user(request.user, new_follower)
+
+    return redirect('posts')
