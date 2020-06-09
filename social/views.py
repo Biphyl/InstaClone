@@ -53,3 +53,10 @@ def comment(request, post_id):
             "comment_form":comment_form,
         }
         return render(request, 'posts.html', context)
+
+def add_comment(request, post_id):
+    posts = Post.objects.get(pk=post_id)
+    context={
+        "posts":posts,
+    }
+    return render(request, 'comments.html', context)
