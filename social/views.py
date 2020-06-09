@@ -112,4 +112,13 @@ def follow(request,operation,pk):
         Following.loose_user(request.user, new_follower)
 
     return redirect('posts')
-    
+
+def likes(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    if post.likes.filter(id=request.user.id).exists():
+        post.likes.remove(request.user)
+        is_liked = False
+    else:
+        post.likes.add(request.user)
+        is_liked=True
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
