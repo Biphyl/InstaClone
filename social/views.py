@@ -36,3 +36,20 @@ def create_post(request):
         "form":form,
     }
     return render(request, 'create_post.html', context)
+
+def comment(request, post_id):
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.user = request.user
+            post = Post.get_post(post_id)
+            comment.post = post
+            comment.save()
+            return redirect('posts')
+        else:
+            comment_form = CommentForm()
+        context = {
+            "comment_form":comment_form,
+        }
+        return render(request, 'posts.html', context)
