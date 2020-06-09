@@ -112,3 +112,4 @@ def follow(request,operation,pk):
         Following.loose_user(request.user, new_follower)
 
     return redirect('posts')
+    
