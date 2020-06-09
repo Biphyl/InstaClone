@@ -122,3 +122,28 @@ def likes(request, post_id):
         post.likes.add(request.user)
         is_liked=True
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def registration(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            form.save()
+            username=form.cleaned_data['username']
+            email=form.cleaned_data['email']
+            password1=form.cleaned_data['password1']
+            recipient=User(username=username,email=email)
+            try:
+                send_welcome_email(username,email)
+                messages.success(request, f'Account has been created successfully!')
+            except:
+                print('error')
+            return redirect('login')
+
+    else:
+        form = RegisterForm()
+    context = {
+        'form':form,
+    }
+    return render(request, 'users/register.html', context)
