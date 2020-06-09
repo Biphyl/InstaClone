@@ -63,16 +63,7 @@ class Profile(models.Model):
 
     def save_profile(self):
         self.save()
-        
-    def delete_profile(self):
-        self.delete()
-    
-    @classmethod   
-    def update_bio(cls,id,new_bio):
-        cls.objects.filter(pk = id).update(bio=new_bio)
-        new_bio_object = cls.objects.get(bio = new_bio)
-        new_bio = new_bio_object.bio
-        return new_bio
+
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE,related_name='comments')

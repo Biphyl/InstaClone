@@ -1,11 +1,11 @@
 from django.shortcuts import render,redirect,HttpResponse,get_object_or_404,HttpResponseRedirect
 from .models import Profile,Post,User,Comment,Following
 from django.contrib import messages
-from .forms import UserCreationForm,UserUpdateForm,CommentForm,ProfileUpdateForm,PostForm
+from .forms import UserCreationForm,UserUpdateForm,CommentForm,ProfileUpdateForm,PostForm,RegisterForm
 from django.contrib.auth.decorators import login_required
 
 
-
+@login_required
 def post(request):
     posts = Post.objects.all()
     users = User.objects.exclude(id=request.user.id)
@@ -21,6 +21,8 @@ def post(request):
 
     return render(request, 'posts.html', context)
 
+
+@login_required
 def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST,request.FILES)
@@ -37,6 +39,7 @@ def create_post(request):
     }
     return render(request, 'create_post.html', context)
 
+@login_required
 def comment(request, post_id):
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
@@ -54,6 +57,7 @@ def comment(request, post_id):
         }
         return render(request, 'posts.html', context)
 
+@login_required
 def add_comment(request, post_id):
     posts = Post.objects.get(pk=post_id)
     context={
@@ -62,6 +66,7 @@ def add_comment(request, post_id):
     return render(request, 'comments.html', context)
 
 
+@login_required
 def profile(request):
     posts = Post.objects.all()
     if request.method == 'POST':
@@ -113,6 +118,7 @@ def follow(request,operation,pk):
 
     return redirect('posts')
 
+@login_required
 def likes(request, post_id):
     post = Post.objects.get(pk=post_id)
     if post.likes.filter(id=request.user.id).exists():
