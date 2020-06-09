@@ -20,13 +20,13 @@
                             <a href="{% url 'commenting' post.id %}"><img class="w-100" src="{{post.image.url}}" alt="{{post.author}}"></a>
                         </div>
                         <div class="post-info">
-                            <a class="text-success ml-3" href="{% url 'commenting' post.id%}"><i class="fa fa-comment"></i>
+                            <a class="text-primary ml-3" href="{% url 'commenting' post.id%}"><i class="fa fa-comment"></i>
                             {{post.comments.all.count}} {{post.comments.all.pluralize}}</a>
-                            <a class="text-success ml-3" href="#"><i class="fa fa-share"></i></a>
+                            <a class="text-info ml-3" href="#"><i class="fa fa-share"></i></a>
                             {% if post.likes.id == user.id %}
-                            <a class="text-danger ml-3" href="{% url 'likes' post.id%}"><i class="fa fa-heart "></i>{{post.likes.count}}</a>
+                            <a class="text-info ml-3" href="{% url 'likes' post.id%}"><i class="fa fa-heart "></i>{{post.likes.count}}</a>
                                 {% else %}
-                            <a class="text-success ml-2" href="{% url 'likes' post.id%}"><i class="fa fa-heart "></i>
+                            <a class="text-info ml-2" href="{% url 'likes' post.id%}"><i class="fa fa-heart "></i>
                             {{post.likes.count}}
                             </a>
                             {% endif %}
@@ -37,7 +37,7 @@
                             <form action="{% url 'comment' post.id %}" method="post">
                                 {% csrf_token %}
                                 {{comment_form|crispy}}
-                                <input type="submit" class="btn btn-success"  value="Comment">
+                                <input type="submit" class="btn btn-primary"  value="Comment">
                             </form>
                         </div>
                     </div>
